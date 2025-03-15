@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { UserInfo, UserRole } from "../types";
+import env from "../config/env";
 
 interface AuthState {
   token: string | null;
@@ -22,22 +23,12 @@ interface AuthState {
 const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
-      // 开发环境下使用测试用户
-      token: import.meta.env.DEV ? "test-token" : null,
-      user: import.meta.env.DEV
-        ? {
-            id: "1",
-            username: "admin",
-            name: "管理员",
-            avatar: "",
-            email: "admin@example.com",
-            role: "admin",
-            permissions: ["*"],
-          }
-        : null,
-      isLoggedIn: import.meta.env.DEV ? true : false,
-      roles: import.meta.env.DEV ? ["admin"] : [],
-      permissions: import.meta.env.DEV ? ["*"] : [],
+      // 初始状态（根据配置决定是否自动登录）
+      token: env.enableAutoLogin ? "auto-login-token" : null,
+      user: env.enableAutoLogin ? env.autoLoginUser : null,
+      isLoggedIn: env.enableAutoLogin,
+      roles: env.enableAutoLogin ? [env.autoLoginUser.role] : [],
+      permissions: env.enableAutoLogin ? env.autoLoginUser.permissions : [],
 
       setToken: (token: string) => set({ token }),
 

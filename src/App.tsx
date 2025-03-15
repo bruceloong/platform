@@ -4,10 +4,11 @@ import { ConfigProvider, Spin, App as AntdApp, theme } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import { AppRoutes } from "./routes";
 import { useSettingsStore } from "./store";
+import env from "./config/env";
 import "./App.css";
 
-// 引入Mock数据（开发环境）
-if (import.meta.env.DEV) {
+// 引入Mock数据（根据配置决定）
+if (env.useMock) {
   import("./mock");
 }
 

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button, Checkbox, message, Alert } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useAuth } from "../hooks";
 import { LoginParams } from "../types";
+import env from "../config/env";
 
 const Login: React.FC = () => {
   const { login } = useAuth();
@@ -27,6 +28,16 @@ const Login: React.FC = () => {
       onFinish={onFinish}
       size="large"
     >
+      {env.useMock && (
+        <Alert
+          message="演示环境登录提示"
+          description="本系统使用 Mock 数据，可使用以下账号登录：admin/admin、editor/editor、guest/guest"
+          type="info"
+          showIcon
+          style={{ marginBottom: 24 }}
+        />
+      )}
+
       <Form.Item
         name="username"
         rules={[{ required: true, message: "请输入用户名" }]}

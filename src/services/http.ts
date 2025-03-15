@@ -2,10 +2,11 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { message } from "antd";
 import { useAuthStore } from "../store";
 import { ApiResponse } from "../types";
+import env from "../config/env";
 
 // 创建axios实例
 const http = axios.create({
-  baseURL: "/api",
+  baseURL: env.apiBaseUrl,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
