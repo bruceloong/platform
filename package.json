@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && cp public/CNAME dist/",
+    "build": "vite build && cp public/CNAME dist/",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "pnpm build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
