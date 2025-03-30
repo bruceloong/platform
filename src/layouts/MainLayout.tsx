@@ -16,6 +16,7 @@ import { useAuth } from "../hooks";
 import { useSettingsStore } from "../store";
 import { authRoutes } from "../routes/routes";
 import { getRoleName } from "../utils";
+import "./mainLayout.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -206,11 +207,22 @@ const MainLayout: React.FC = () => {
                     alignItems: "center",
                     cursor: "pointer",
                     padding: "0 12px",
+                    borderRadius: "4px",
+                    transition: "background-color 0.3s",
+                    height: "48px",
+                    marginRight: "8px",
+                    border: "1px solid transparent",
                   }}
+                  className="user-dropdown-trigger"
                 >
-                  <Avatar src={user.avatar} style={{ marginRight: "8px" }} />
-                  <div>
-                    <div style={{ fontWeight: "bold" }}>{user.name}</div>
+                  <Avatar
+                    src={user.avatar}
+                    icon={!user.avatar && <UserOutlined />}
+                    style={{ marginRight: "8px" }}
+                    size="default"
+                  />
+                  <div style={{ lineHeight: "1.2" }}>
+                    <div style={{ fontWeight: "500" }}>{user.name}</div>
                     <div
                       style={{ fontSize: "12px", color: "rgba(0, 0, 0, 0.45)" }}
                     >
