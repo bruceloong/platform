@@ -1,9 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Alternative)
 
 on:
   push:
     branches:
-      - master # 修改为您的默认分支名称
+      - master
 
 # 设置GITHUB_TOKEN的权限
 permissions:
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # 获取完整历史记录
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -51,9 +49,8 @@ jobs:
         run: pnpm build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: dist # 构建输出的文件夹
-          branch: gh-pages # 部署到的分支
-          clean: true # 清理旧文件
-          token: ${{ secrets.GITHUB_TOKEN }} # 使用GitHub提供的token
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          cname: platform.yss520.online

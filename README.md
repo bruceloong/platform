@@ -75,3 +75,32 @@ src/
 添加单元测试和集成测试
 优化构建配置，提高性能
 部署到 Vercel 或其他平台
+
+## GitHub Pages 部署指南
+
+为确保 GitHub Pages 正确部署，请按照以下步骤操作：
+
+1. 在仓库设置中，导航到 "Settings" > "Pages"
+2. 确保以下设置正确：
+   - 源（Source）: 选择 "Deploy from a branch"
+   - 分支（Branch）: 选择 "gh-pages" / "/(root)"
+   - 自定义域（Custom domain）: 如果使用自定义域名，确保填写 "platform.yss520.online"
+   - 强制 HTTPS: 建议启用
+
+### 部署问题排查：
+
+如果遇到 `git failed with exit code 128` 错误：
+
+1. 检查 GitHub Actions 权限：
+
+   - 进入仓库设置 > Actions > General
+   - 确保 "Workflow permissions" 设置为 "Read and write permissions"
+
+2. 如果使用个人访问令牌（PAT）部署：
+
+   - 检查令牌是否有足够权限
+   - 检查令牌是否过期
+
+3. 使用最新版本的部署工具：
+   - JamesIves/github-pages-deploy-action@v4
+   - 或 peaceiris/actions-gh-pages@v3
